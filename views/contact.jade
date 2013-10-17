@@ -7,19 +7,8 @@ head
     meta(name='description', content='')
     meta(name='author', content='')
     link(href='stylesheets/bootstrap.css', rel='stylesheet')
-    style(type='text/css')
-      body {
-      padding-top: 20px;
-      padding-bottom: 40px;
-      }
-      .container-narrow {
-      margin: 0 auto;
-      max-width: 700px;
-      }
-      .container-narrow > hr {
-      margin: 30px 0;
-      }
     link(href='stylesheets/bootstrap-responsive.css', rel='stylesheet')
+    link(href='stylesheets/style.css', rel='stylesheet')
   body
     .container
       .masthead
@@ -60,8 +49,8 @@ head
                   input#email.span3(name='email', type='email', placeholder='Email address')
                 .controls
                   textarea#message.span6(name='message', placeholder='Your Message', rows='5')
-                .controls
-                  button#contact-submit.btn.btn-primary.input-medium.pull-right(type='submit') Send
+              .controls
+                button#contact-submit.btn.btn-primary.input-medium.pull-right(type='submit') Send
           .span4
             h3 Chat Live
             p Coming Soon (Node.js and Socket.IO)
