@@ -1,0 +1,17 @@
+h1 Logout
+  form(action='/logout', method='post')
+      fieldset
+        legend Credentials
+        p#error.error
+        label
+          | Email:
+          input(type='text', name='email')
+        br
+        label
+          | Password:
+          input(type='password', name='password')
+        br
+        input(type='submit', value='Logout')
+    ul
+      li
+        a(href='/login') Login
