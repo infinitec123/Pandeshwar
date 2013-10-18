@@ -28,17 +28,18 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-// Import the routes
-fs.readdirSync('routes').forEach(function(file) {
-  if ( file[0] == '.' ) return;
-  var routeName = file.substr(0, file.indexOf('.'));
-  require('./routes/' + routeName)(app);
-});
-
 //app.get('/', routes.index);
 //app.get('/contact', routes.contact);
 //app.post('/mailsend', routes.mailwrite);
 
-http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
+server = require('http').createServer(app);
+io = require('socket.io').listen(server);
+server.listen(app.get('port'));
+console.log('Express server listening on 8080');
+
+// Import the routes
+fs.readdirSync('routes').forEach(function(file) {
+  if ( file[0] == '.' ) return;
+  var routeName = file.substr(0, file.indexOf('.'));
+  require('./routes/' + routeName)(app, server);
 });

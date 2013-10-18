@@ -7,8 +7,46 @@ head
     meta(name='description', content='')
     meta(name='author', content='')
     link(href='stylesheets/bootstrap.css', rel='stylesheet')
+    style(type='text/css')
+      body {
+      padding-top: 20px;
+      padding-bottom: 40px;
+      }
+      .container-narrow {
+      margin: 0 auto;
+      max-width: 700px;
+      }
+      .container-narrow > hr {
+      margin: 30px 0;
+      }
+      .mailreply {
+      display: none;
+      }
+      #chat{
+      height:500px;
+      overflow: auto;
+      }
+      #contentWrap{
+      display: none;
+      }
+      #chatWrap{
+      float: left;
+      border: 1px #cbcbcb dotted;
+      }
+      .error{
+      color: red;
+      }
+      .whisper{
+      color: gray;
+      font-style: italic;
+      }
+      #nickError{
+      color: red;
+      }
+      #users{
+      color: #0cf438;
+      }
     link(href='stylesheets/bootstrap-responsive.css', rel='stylesheet')
-    link(href='stylesheets/style.css', rel='stylesheet')
   body
     .container
       .masthead
@@ -52,11 +90,26 @@ head
               .controls
                 button#contact-submit.btn.btn-primary.input-medium.pull-right(type='submit') Send
           .span4
-            h3 Chat Live.
-            p #{chatstatus}
+            h3 Chat Live
+            p Pandeshwar is online
+            br
+            #nickWrap
+              p Enter your Name:
+              p#nickError
+              form#setNick
+                input#nickname(size='30')
+                button#startchat.btn.btn-primary.btn-small(type='button') Join the Chat
+            #contentWrap
+              #chatWrap
+                #chat.
+                form#send-message
+                  input#messageip(size='35', input='text')
+                  input.btn(type='submit')
+              #users
         hr
         footer
           p © Sharath Pandeshwar 2013
     script(src='javascripts/jquery-1.7.2.min.js')
     script(src='javascripts/bootstrap.min.js')
     script(src='javascripts/main.js')
+    script(src='/socket.io/socket.io.js')

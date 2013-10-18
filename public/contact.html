@@ -26,6 +26,32 @@
         display: none;
       }
 
+      #chat{
+      height:500px;
+    }
+    #contentWrap{
+      display: none;
+    }
+    #chatWrap{
+      float: left;
+      border: 1px #cbcbcb dotted;
+    }
+    .error{
+      color: red;
+    }
+    .whisper{
+      color: gray;
+      font-style: italic;
+    }
+
+    #nickError{
+      color: red;
+    }
+
+    #users{
+      color: #0cf438;
+    }
+
     </style>
     <link href="stylesheets/bootstrap-responsive.css" rel="stylesheet">
 
@@ -79,17 +105,34 @@
 
         <div class="span4">
           <h3>Chat Live</h3>
-          <p>Coming Soon (Node.js and Socket.IO)</p>
-        </div>
-      </div>
+          <p>Pandeshwar is online</p>
+          <br/>
 
-                <div class="row">
-              <div class="alert alert-success alert-dismissable span3 offset1 mailreply">
-               <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <strong>Thanks for your Mail.</strong>
-             </div>
+          <div id="nickWrap">
+          <p>Enter your Name:</p>
+          <p id="nickError"></p>
+          <form id="setNick">
+              <input size="30" id="nickname"></input>
+              <button class="btn btn-primary btn-small" id="startchat" type="button">Join the Chat</button>
+           </form>
           </div>
 
+            <div id="contentWrap">
+             <div id="chatWrap">
+              <div id="chat"></div>
+              
+            <form id="send-message">
+            <input size="35" id="messageip" input="text"></input>
+            <input type="submit" class="btn"></input>
+           </form>
+           </div>
+           <div id="users"></div>
+            </div>
+
+
+
+        </div>
+      </div>
       <hr>
       <footer>
         <p>&copy; Sharath Pandeshwar 2013</p>
@@ -100,7 +143,7 @@
     <script src="javascripts/jquery-1.7.2.min.js"></script>
     <script src="javascripts/bootstrap.min.js"></script>
     <script src="javascripts/main.js"></script>
-
+    <script src="/socket.io/socket.io.js"></script>
 
   </body>
 </html>

@@ -1,4 +1,4 @@
-module.exports = function(app, models) {
+module.exports = function(app, server) {
 
 var is_pandeshwar_logged_in = false;  
 
@@ -12,6 +12,7 @@ var check_LoginStatus = function(){
 }
 
 app.get('/', function (req, res) {
+  //console.log('::::' + req.session.pandeshwar);
   res.sendfile('views/index.html');
 });
 
@@ -71,7 +72,7 @@ app.post('/login', function(req, response){
  console.log('Request received to login received with email: ' + email + ' Password: ' + password);
  if(email == "raosharat@gmail.com" && password =="Tenacity456!"){
   console.log("Welcome Pandeshwar. You are authorized.");
-  is_pandeshwar_logged_in = true; 
+  is_pandeshwar_logged_in = true;
     //res.render('contact', {chatstatus: check_LoginStatus()});
     response.writeHead(301,
      {Location: '/contact'}
@@ -99,34 +100,75 @@ app.post('/logout', function(req, response){
  
 });
 
-}    
+//Socket Functions
+users = {};
 
+ io.sockets.on('connection', function(socket){
+  socket.on('new user', function(data, callback){
+    console.log("New connection received from " + data);
 
+    if(data == "Pandeshwar" && !(is_pandeshwar_logged_in)){
+      callback("Fucker. You cannot be Pandeshwar");
+      return;
+    }
 
-/* exports.index = function(req, res){
-  //res.render('index', { title: 'Express' });
-  res.sendfile('views/index.html');
-};
+    if(!is_pandeshwar_logged_in){
+      callback("Pandeshwar is currently offline. Please come back later.");
+      return;
+    }
 
-exports.contact = function(req, res){
-  //res.sendfile('views/contact.html');
-  res.render('contact', {title: 'Chat with Pandeshwar'});
-}; 
+      if((data != "Pandeshwar") && !("Pandeshwar" in users)){
+        callback("Pandeshwar is currently offline. Please come back later.");
+        return;
+      } 
 
+    if (data in users){
+      callback("Username already taken. Try another one.");
+    } else{
+      callback("success");
+      socket.nickname = data;
+      users[socket.nickname] = socket;
+      updateNicknames();
+    } 
+  });
+  
+  function updateNicknames(){
+    io.sockets.emit('usernames', Object.keys(users));
+  }
 
-exports.mailwrite = function (req, res) {
-    var name = req.param('name', '');
-    var message = req.param('message', '');
-    var email = req.param('email', null);
-    //console.log("Post request came from" + email);
-    writeEMail(name, email, message, function(success){
-      if (success) {
-        res.send('success');
-      } else {
-        res.send('failure');
+  socket.on('send message', function(data, callback){
+    console.log("Message received" + data);
+    var msg = data.trim();
+
+    console.log('after trimming message is: ' + msg);
+    if(msg.substr(0,3) === '/w '){
+      msg = msg.substr(3);
+      var ind = msg.indexOf(' ');
+      if(ind !== -1){
+        var name = msg.substring(0, ind);
+        var msg = msg.substring(ind + 1);
+        if(name in users){
+          users[name].emit('whisper', {msg: msg, nick: socket.nickname});
+          console.log('message sent is: ' + msg);
+          console.log('Whisper!');
+        } else{
+          callback('Error!  Enter a valid user.');
+        }
+      } else{
+        callback('Error!  Please enter a message for your whisper.');
       }
-    }); 
+    } else{
+      io.sockets.emit('new message', {msg: msg, nick: socket.nickname});
+    }
+  });
+  
+  socket.on('disconnect', function(data){
+    console.log(socket.nickname + " dropped connection");
+      if(!socket.nickname) return;
+        delete users[socket.nickname];
+        updateNicknames();
+  });
+}); 
 
-   /* */
-
+}    
 
