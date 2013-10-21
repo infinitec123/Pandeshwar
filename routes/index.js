@@ -113,12 +113,12 @@ users = {};
     }
 
     if(!is_pandeshwar_logged_in){
-      callback("Pandeshwar is currently offline. Please come back later.");
+      callback("Pandeshwar is currently Offline. Please come back later.");
       return;
     }
 
       if((data != "Pandeshwar") && !("Pandeshwar" in users)){
-        callback("Pandeshwar is currently offline. Please come back later.");
+        callback("Pandeshwar is currently Offline. Please come back later.");
         return;
       } 
 
