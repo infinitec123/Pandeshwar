@@ -24,7 +24,7 @@ head
       }
       #chat{
       height:500px;
-      overflow:auto
+      overflow:auto;
       }
       #contentWrap{
       display: none;
@@ -99,12 +99,12 @@ head
                 button#contact-submit.btn.btn-primary.input-medium.pull-right(type='submit') Send
           .span4
             h3 Chat Live
-            p Pandeshwar is online
+            p #{chatstatus}
             br
             #nickWrap
               p Enter your Name:
               p#nickError
-              p#applicationstatus Contacting the Server
+              p#applicationstatus Contacting the Server ...
               form#setNick
                 input#nickname(size='30')
                 button#startchat.btn.btn-primary.btn-small(type='button') Join the Chat
@@ -113,8 +113,10 @@ head
                 #chat
                 form#send-message
                   input#messageip(size='35', input='text')
-                  input.btn(type='submit')
+                  input.btn.btn-primary(type='submit')
+                  input.btn.btn-info#clearbutton(type='submit' value='Clear') 
               #users
+
         hr
         footer
           p © Sharath Pandeshwar 2013

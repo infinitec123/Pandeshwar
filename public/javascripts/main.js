@@ -18,7 +18,11 @@
 			var $messageForm = $('#send-message');
 			var $messageBox = $('#messageip');
 			var $chat = $('#chat');
-			//var $nickDiv = $('#nickWrap');
+			var $clearbutton = $('#clearbutton');
+
+			$clearbutton.click(function(e){
+				$chat.empty();
+			});
 
 			$startchat.click(function(e){
 				if($nickBox.val() == ""){
@@ -47,7 +51,7 @@
 					}
 				});
 
-			});
+			}); // end of startchat
 
 			function validateEmail(email) { 
    				 var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
