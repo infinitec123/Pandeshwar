@@ -33,8 +33,11 @@
 					return;
 				}
 
+				$('#applicationstatus').show();
 
 				socket.emit('new user', $nickBox.val(), function(data){
+					// Show a message that you have contacted the server.
+					$('#applicationstatus').hide();
 					if(data == "success"){
 						$('#contentWrap').show();
 						$('#nickWrap').hide();
