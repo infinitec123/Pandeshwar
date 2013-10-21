@@ -141,16 +141,24 @@ users = {};
     var msg = data.trim();
 
     console.log('after trimming message is: ' + msg);
-    if(msg.substr(0,3) === '/w '){
-      msg = msg.substr(3);
+    
+    // Start using @ instead
+
+    if(msg.substr(0,1) === '@'){
+      //Whisper found.
+      msg = msg.substr(1);
       var ind = msg.indexOf(' ');
+      
       if(ind !== -1){
         var name = msg.substring(0, ind);
         var msg = msg.substring(ind + 1);
+        //console.log("Whisper FOund::" + name + "::" + msg )
         if(name in users){
           users[name].emit('whisper', {msg: msg, nick: socket.nickname});
+          users[socket.nickname].emit('whisper', {msg: msg, nick: socket.nickname});
           console.log('message sent is: ' + msg);
-          console.log('Whisper!');
+          console.log('Whisper!');      
+      //@ should end here.
         } else{
           callback('Error!  Enter a valid user.');
         }

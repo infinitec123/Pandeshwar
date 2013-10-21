@@ -24,7 +24,6 @@ head
       }
       #chat{
       height:500px;
-      overflow: auto;
       }
       #contentWrap{
       display: none;
@@ -45,6 +44,11 @@ head
       }
       #users{
       color: #0cf438;
+      }
+      .timestamp{
+      color: #d4d4d4;
+      float: right;
+      font-size: small;
       }
     link(href='stylesheets/bootstrap-responsive.css', rel='stylesheet')
   body
@@ -91,7 +95,7 @@ head
                 button#contact-submit.btn.btn-primary.input-medium.pull-right(type='submit') Send
           .span4
             h3 Chat Live
-            p #{chatstatus}
+            p Pandeshwar is online
             br
             #nickWrap
               p Enter your Name:
@@ -101,7 +105,7 @@ head
                 button#startchat.btn.btn-primary.btn-small(type='button') Join the Chat
             #contentWrap
               #chatWrap
-                #chat.
+                #chat
                 form#send-message
                   input#messageip(size='35', input='text')
                   input.btn(type='submit')

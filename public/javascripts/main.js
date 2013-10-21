@@ -4,6 +4,7 @@
     			alert('Socket was loaded.');
 			}); */
             //alert('Page loaded');
+
             var socket = io.connect();
 			var $ContactForm = $('#contactform');
 			var $name_sender = $('#name');
@@ -24,6 +25,14 @@
 					alert("Enter your Name");
 					return;
 				}
+
+				var nickname = $nickBox.val();
+				var n = nickname.split(" ");
+				if(n.length != 1){
+					alert("Chose One Word.");
+					return;
+				}
+
 
 				socket.emit('new user', $nickBox.val(), function(data){
 					if(data == "success"){
@@ -51,6 +60,9 @@
 
 			$messageForm.submit(function(e){
 				e.preventDefault();
+				if($messageBox.val() == ""){
+					return;
+				}
 				//alert("Will try to submit the form")
 				socket.emit('send message', $('#messageip').val(), function(data){
 					$chat.append('<span class="error">' + data + "</span><br/>");
@@ -77,7 +89,24 @@
 			}); 
 
 			socket.on('new message', function(data){
-				$chat.append('<span class="msg"><b>' + data.nick + ': </b>' + data.msg + "</span><br/>");
+				//$chat.append('<span class="msg"><b>' + data.nick + ': </b>' + data.msg + "</span><br/>");
+
+				var d = new Date();
+				var a_p = "";
+  				var curr_hour = d.getHours();
+  				if (curr_hour < 12) { a_p = "AM"; } else { a_p = "PM"; }
+				if (curr_hour == 0) { curr_hour = 12; } 
+				if (curr_hour > 12) { curr_hour = curr_hour - 12; }
+
+				var curr_min = d.getMinutes();
+				curr_min = curr_min + "";
+				if (curr_min.length == 1) { curr_min = "0" + curr_min; }
+
+				var time_string =curr_hour + " : " + curr_min + " " + a_p;
+
+				$chat.append('<span class="msg"><b>' + data.nick + ': </b>' + "</span>");
+				$chat.append('<span class="timestamp"><b>' + time_string + "</span><br/>");
+				$chat.append(data.msg + "<br/>") ;
 				//$chat.val($chat.val()+'data.nick' +);
 			});
 			
