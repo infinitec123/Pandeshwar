@@ -74,7 +74,8 @@ app.post('/login', function(req, response){
   console.log("Welcome Pandeshwar. You are authorized.");
   is_pandeshwar_logged_in = true;
   //console.log('Set name to Pandeshwar');
-  response.cookie('name', 'Pandeshwar');
+  response.cookie('name', 'Pandeshwar', { signed: true });
+  //response.cookie('name', 'Pandeshwar');
 
     //res.render('contact', {chatstatus: check_LoginStatus()});
     response.writeHead(301,
@@ -112,9 +113,14 @@ io.set('authorization', function (data, accept) {
         if (data.headers.cookie) {
             //console.log("cookie found");
             data.cookie = require('cookie').parse(data.headers.cookie);
-            data.sessionID = data.cookie['express.sid'].split('.')[0];
-            if(data.cookie['name'] == "Pandeshwar"){
-                data.user = data.cookie['name'];
+         // var  = require('connect').utils.parseSignedCookie(data.headers.cookie);
+            var signeduser = data.cookie['name'] || "useless";
+            //console.log("signed user " + signeduser);
+            var user_name = require('connect').utils.parseSignedCookie(signeduser, 'somesuperspecialsecrethere');
+            //console.log("decrypted name " + user_name);
+
+            if(user_name == "Pandeshwar"){
+                data.user = user_name;
                 console.log("Confirmed Pandeshwar");
             }
         } 
@@ -125,8 +131,8 @@ io.set('authorization', function (data, accept) {
   socket.on('new user', function(data, callback){
 
     var user_name = socket.handshake.user;
-    console.log("New connection received from " + data);
-    console.log("As set by cookie name is " + user_name);
+    //console.log("New connection received from " + data);
+    //console.log("As set by cookie name is " + user_name);
 
     if(data == "Pandeshwar" && !(is_pandeshwar_logged_in)){
       callback("Fucker. You cannot be Pandeshwar");
@@ -134,7 +140,7 @@ io.set('authorization', function (data, accept) {
     } 
 
     if(data == "Pandeshwar" && user_name != "Pandeshwar"){
-      callback("Fucker. You aren't be Pandeshwar");
+      callback("Fucker. You aren't Pandeshwar");
       return;
     }
 
