@@ -91,7 +91,7 @@ app.post('/logout', function(req, response){
  var email = req.body.email;
  var password = req.body.password;
  console.log('Request received to logout with email: ' + email + ' Password: ' + password);
- if(email == "raosharat@gmail.com" && password =="Tenacity456!"){
+ if(email == "raosharat@gmail.com" && password =="uthinkIllkeepthepasswordhere"){
   console.log("GoodBye Pandeshwar. You are logged out.");
   is_pandeshwar_logged_in = false; 
     //res.render('contact', {chatstatus: check_LoginStatus()});
