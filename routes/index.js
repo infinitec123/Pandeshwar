@@ -1,4 +1,4 @@
-module.exports = function(app, server) {
+module.exports = function(app, server, sessionStore) {
 
 var is_pandeshwar_logged_in = false;  
 
@@ -12,11 +12,11 @@ var check_LoginStatus = function(){
 }
 
 app.get('/', function (req, res) {
-  //console.log('::::' + req.session.pandeshwar);
   res.sendfile('views/index.html');
 });
 
 app.get('/contact', function (req, res) {
+  console.log('User name is:: '  + req.cookies.name);
   res.render('contact', {chatstatus: check_LoginStatus()});
 });
 
@@ -73,6 +73,9 @@ app.post('/login', function(req, response){
  if(email == "raosharat@gmail.com" && password =="Tenacity456!"){
   console.log("Welcome Pandeshwar. You are authorized.");
   is_pandeshwar_logged_in = true;
+  //console.log('Set name to Pandeshwar');
+  response.cookie('name', 'Pandeshwar');
+
     //res.render('contact', {chatstatus: check_LoginStatus()});
     response.writeHead(301,
      {Location: '/contact'}
@@ -103,14 +106,38 @@ app.post('/logout', function(req, response){
 //Socket Functions
 users = {};
 
- io.sockets.on('connection', function(socket){
+io.set('authorization', function (data, accept) {
+        
+        console.log("authorization step::");
+        if (data.headers.cookie) {
+            //console.log("cookie found");
+            data.cookie = require('cookie').parse(data.headers.cookie);
+            data.sessionID = data.cookie['express.sid'].split('.')[0];
+            if(data.cookie['name'] == "Pandeshwar"){
+                data.user = data.cookie['name'];
+                console.log("Confirmed Pandeshwar");
+            }
+        } 
+         accept(null, true);
+});
+
+ io.sockets.on('connection', function(socket){ //begin of socket connect
   socket.on('new user', function(data, callback){
+
+    var user_name = socket.handshake.user;
     console.log("New connection received from " + data);
+    console.log("As set by cookie name is " + user_name);
 
     if(data == "Pandeshwar" && !(is_pandeshwar_logged_in)){
       callback("Fucker. You cannot be Pandeshwar");
       return;
+    } 
+
+    if(data == "Pandeshwar" && user_name != "Pandeshwar"){
+      callback("Fucker. You aren't be Pandeshwar");
+      return;
     }
+
 
     if(!is_pandeshwar_logged_in){
       callback("Pandeshwar is currently Offline. Please come back later.");
@@ -140,11 +167,8 @@ users = {};
   socket.on('send message', function(data, callback){
     //console.log("Message received" + data);
     var msg = data.trim();
-
-    console.log('after trimming message is: ' + msg);
+    //console.log('after trimming message is: ' + msg);
     
-    // Start using @ instead
-
     if(msg.substr(0,1) === '@'){
       //Whisper found.
       msg = msg.substr(1);
@@ -159,7 +183,6 @@ users = {};
           users[socket.nickname].emit('whisper', {msg: msg, nick: socket.nickname});
           //console.log('message sent is: ' + msg);
           //console.log('Whisper!');      
-      //@ should end here.
         } else{
           callback('Error!  Enter a valid user.');
         }
@@ -175,12 +198,13 @@ users = {};
   socket.on('disconnect', function(data){
     console.log(socket.nickname + " dropped connection");
       if(!socket.nickname) return;
+      if(socket.nickname =="Pandeshwar") { is_pandeshwar_logged_in = false;  }
         socket.broadcast.emit('disconnection', socket.nickname + " left the chat.<br/>");
         delete users[socket.nickname];
         updateNicknames();
 
   });
-}); 
+});  //end of socket connect
 
 }    
 

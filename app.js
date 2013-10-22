@@ -7,9 +7,11 @@ var express = require('express');
 var http = require('http');
 var path = require('path');
 var fs          = require('fs');
+var connect = require('connect');
 var routes = require('./routes/index.js');
 
 var app = express();
+var sessionStore = new connect.session.MemoryStore();
 
 // all environments
 app.set('port', process.env.PORT || 8080);
@@ -19,6 +21,9 @@ app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.limit('1mb'));
 app.use(express.bodyParser());
+app.use(express.cookieParser('somesuperspecialsecrethere')); 
+app.use(express.session({ key: 'express.sid',
+                     store: sessionStore}));
 app.use(express.methodOverride());
 //app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
@@ -41,5 +46,5 @@ console.log('Express server listening on 8080');
 fs.readdirSync('routes').forEach(function(file) {
   if ( file[0] == '.' ) return;
   var routeName = file.substr(0, file.indexOf('.'));
-  require('./routes/' + routeName)(app, server);
+  require('./routes/' + routeName)(app, server, sessionStore);
 });

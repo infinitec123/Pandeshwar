@@ -24,6 +24,7 @@
 				$chat.empty();
 			});
 
+
 			$startchat.click(function(e){
 				if($nickBox.val() == ""){
 					alert("Enter your Name");
@@ -98,6 +99,10 @@
 			socket.on('new message', function(data){
 				//$chat.append('<span class="msg"><b>' + data.nick + ': </b>' + data.msg + "</span><br/>");
 
+				//document.title = "Contact/Incoming Chat";
+				$.titleAlert('Incoming Chat', {stopOnMouseMove:true, stopOnFocus:false});
+				//$('.container').append("<embed height='50' width='100' hidden='true' src='chat_alert.mp3'>");
+
 				var d = new Date();
 				var a_p = "";
   				var curr_hour = d.getHours();
@@ -118,10 +123,12 @@
 			});
 			
 			socket.on('whisper', function(data){
+				$.titleAlert('Incoming Message', {stopOnMouseMove:true, stopOnFocus:false});
 				$chat.append('<span class="whisper"><b>' + data.nick + ': </b>' + data.msg + "</span><br/>");
 			});
 
 			socket.on('announcement', function(data){
+				$.titleAlert('Incoming Announcement', {stopOnMouseMove:true, stopOnFocus:false});
 				$chat.append('<span class="announcement">' + data + '</span>');
 			});
 
