@@ -121,6 +121,14 @@
 				$chat.append('<span class="whisper"><b>' + data.nick + ': </b>' + data.msg + "</span><br/>");
 			});
 
+			socket.on('announcement', function(data){
+				$chat.append('<span class="announcement">' + data + '</span>');
+			});
+
+			socket.on('disconnection', function(data){
+				$chat.append('<span class="announcement">' + data + '</span>');
+			});
+
 			
 			socket.on('usernames', function(data){
 				var html = '';

@@ -120,7 +120,7 @@ users = {};
       if((data != "Pandeshwar") && !("Pandeshwar" in users)){
         callback("Pandeshwar is currently Offline. Please come back later.");
         return;
-      } 
+      }  
 
     if (data in users){
       callback("Username already taken. Try another one.");
@@ -129,6 +129,7 @@ users = {};
       socket.nickname = data;
       users[socket.nickname] = socket;
       updateNicknames();
+      socket.broadcast.emit('announcement', socket.nickname + " joined the chat.<br/>");
     } 
   });
   
@@ -137,7 +138,7 @@ users = {};
   }
 
   socket.on('send message', function(data, callback){
-    console.log("Message received" + data);
+    //console.log("Message received" + data);
     var msg = data.trim();
 
     console.log('after trimming message is: ' + msg);
@@ -156,8 +157,8 @@ users = {};
         if(name in users){
           users[name].emit('whisper', {msg: msg, nick: socket.nickname});
           users[socket.nickname].emit('whisper', {msg: msg, nick: socket.nickname});
-          console.log('message sent is: ' + msg);
-          console.log('Whisper!');      
+          //console.log('message sent is: ' + msg);
+          //console.log('Whisper!');      
       //@ should end here.
         } else{
           callback('Error!  Enter a valid user.');
@@ -166,15 +167,18 @@ users = {};
         callback('Error!  Please enter a message for your whisper.');
       }
     } else{
-      io.sockets.emit('new message', {msg: msg, nick: socket.nickname});
+      socket.broadcast.emit('new message', {msg: msg, nick: socket.nickname});
+      users[socket.nickname].emit('new message', {msg: msg, nick: "Me"});
     }
   });
   
   socket.on('disconnect', function(data){
     console.log(socket.nickname + " dropped connection");
       if(!socket.nickname) return;
+        socket.broadcast.emit('disconnection', socket.nickname + " left the chat.<br/>");
         delete users[socket.nickname];
         updateNicknames();
+
   });
 }); 
 
