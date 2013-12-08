@@ -15,7 +15,7 @@ me.mail = (function() {
     //---------------- BEGIN MODULE SCOPE VARIABLES --------------
 	var 
 		jqueryMap = {},
-		initModule, mailMethod, 
+		initModule, mailMethod, onSubmitMail,
 		validateEmail, setjQueryMap;
     //----------------- END MODULE SCOPE VARIABLES ---------------
 
@@ -59,6 +59,20 @@ me.mail = (function() {
     //------------------- END DOM METHODS ------------------------
     
     //------------------- BEGIN EVENT HANDLERS -------------------
+    onSubmitMail = function(){
+    	var 
+    		_sender_name = jqueryMap.$name_sender.val(),
+    		_sender_email = jqueryMap.$email_sender.val(),
+    		_email_body = jqueryMap.$message.val();
+    	console.log('onSubmitMail event handler called');	
+    	mailMethod(_sender_name, _sender_email, _email_body, function(data){
+    		if(data === 'success') {
+    			alert('Mail Sent Successfully!');
+    		} else {
+    			alert('Mail Send Failed!');
+    		}
+    	});
+    };
     //------------------- END EVENT HANDLERS ---------------------
     
     //------------------- BEGIN CALLBACKS ------------------------
@@ -67,6 +81,7 @@ me.mail = (function() {
     //------------------- BEGIN PUBLIC METHODS -------------------
     initModule = function(){
   	  setjQueryMap();
+  	  jqueryMap.$formsubmit_button.bind('click', onSubmitMail);
     };
 	
     return {
