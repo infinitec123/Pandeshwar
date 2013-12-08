@@ -80,7 +80,7 @@ me.model = (function(){
 		stateMap.user = makePerson(data.name, data.email);
 		$.gevent.publish('me-login', [stateMap.user]);
 		chat.join();
-		//me.chatui.setSliderPosition('opened'); //This can be avoided by more 'lose' binding like event
+		
 	};
 
 	people = (function(){
@@ -142,11 +142,11 @@ me.model = (function(){
 				_usersList = arg_list[0];
 			stateMap.chatters = arg_list[0];
 			$.gevent.publish('me-listchange', [ arg_list ]);
-			if(stateMap.chatee){
+			/*if(stateMap.chatee){
 				console.log("I was chatting with" + stateMap.chatee.email);
 			} else {
 				console.log("I was chatting with myself");
-			}
+			} */
 			
 			//******* if 'chatee' is no longer there 'set_chatee must be called'
 			if(stateMap.chatee){

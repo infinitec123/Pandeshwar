@@ -67,9 +67,10 @@ head
         if _user
           div#welcomebox
             h4.
-              #{userName}, 
+              Welcome #{userName} 
+          div#welcomebox_body
             h6. 
-              Please Wait until ChatBox customizes for you.  
+              Loading the Chatbox ...  
         else 
             #chatInvite
               a.btn.btn-primary(href='/auth/facebook') Login through FaceBook to Chat

@@ -20,7 +20,7 @@ var me = (function(){
       //console.log("Received " + $name + "::" + $email);
       me.shell.initModule($container, $name, $email);
     } else{
-      console.log("Chat is not enabled untill you Login");
+      //console.log("Chat is not enabled untill you Login");
     }
   	
   };

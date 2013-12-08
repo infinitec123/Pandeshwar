@@ -97,6 +97,8 @@ me.chatui = (function(){
       $input    : $slider.find( '.me-chat-msg-in input[type=text]'),
       $send     : $slider.find( '.me-chat-msg-send' ),
       $form     : $slider.find( '.me-chat-msg-form' ),
+      $welcome_body  : $('#welcomebox_body'),
+      $logout_button : $('#log_out'),
       $window   : $(window)
     };
 
@@ -156,6 +158,7 @@ me.chatui = (function(){
 
   onLogin = function(){
     setSliderPosition('opened');
+    jqueryMap.$welcome_body.html('<button id="log_out" type="submit" class="btn btn-primary">Logout</button>');
   };
 
   onLogout = function(){
