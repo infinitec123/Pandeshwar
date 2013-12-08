@@ -20,7 +20,11 @@ var routes = require('./lib/routes');
 var env = process.env.NODE_ENV || 'development',
     config = require('./config/config')[env];
 
-mongoose.connect(config.db); 
+var dbPath = process.env.MONGOLAB_URI || 'mongodb://localhost/pandeshwar';
+
+mongoose.connect(dbPath, function onMongooseError(err) {
+    if (err) throw err;
+});
 require('./models/user');   
 require('./lib/passport')(passport, config)
 
