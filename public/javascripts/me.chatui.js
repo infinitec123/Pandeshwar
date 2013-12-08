@@ -289,15 +289,14 @@ me.chatui = (function(){
       _msg_body = jqueryMap.$msg_log.val();
 
       if($(event.target).hasClass('me-chat-msg-send')){
-        console.log('Its send button!');
+        console.log('Its send button!' + _name + "::" + _email + "::" + _msg_body);
+        me.mail.mailMethod(_name, _email, _msg_body, function(_res){
+          if(_res === 'success'){
+            //alert('Mailed successfully!');
+            clearChat();
+          }
+        }); 
       }
-
-    /*  me.mail.mailMethod(_name, _email, _msg_body, function(_res){
-        if(_res === 'success'){
-          //alert('Mailed successfully!');
-          clearChat();
-        }
-      }); */
       return false;
     } 
 
@@ -312,7 +311,7 @@ me.chatui = (function(){
     jqueryMap.$send.addClass('me-x-select');
     setTimeout(function(){
       jqueryMap.$send.removeClass('me-x-select');
-    }, 2500);
+    }, 250);
     return false;
   };
 
