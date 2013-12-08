@@ -159,6 +159,7 @@ me.chatui = (function(){
   onLogin = function(){
     setSliderPosition('opened');
     jqueryMap.$welcome_body.html('<button id="log_out" type="submit" class="btn btn-info">Logout</button>');
+    jqueryMap.$logout_button.bind('utap', LogMeout);
   };
 
   onLogout = function(){
@@ -218,7 +219,7 @@ me.chatui = (function(){
     if ( list_html ==="" ) {
       list_html = String()
         + '<div class="me-chat-list-note">'
-        + 'To chat alone is the fate of all great souls...<br><br>'
+        + 'To talk to oneself is the fate of all great souls...<br><br>'
         + 'No one is online'
         + '</div>';
       clearChat();
@@ -410,14 +411,11 @@ me.chatui = (function(){
     jqueryMap.$list_box.bind('utap', onTapList);
     jqueryMap.$send.bind('utap', onSubmitMsg);
     jqueryMap.$form.bind('submit', onSubmitMsg);
-    jqueryMap.$logout_button.bind('utap', LogMeout);
-
 
   };
   return {
   	setSliderPosition: setSliderPosition,
-  	initModule: initModule,
-    jqueryMap: jqueryMap //***** To be removed.
+  	initModule: initModule
   };
   //------------------- END PUBLIC METHODS ---------------------
 }());
