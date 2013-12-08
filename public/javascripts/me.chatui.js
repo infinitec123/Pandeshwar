@@ -159,8 +159,8 @@ me.chatui = (function(){
   onLogin = function(){
     setSliderPosition('opened');
     jqueryMap.$welcome_body.html('<button id="log_out" type="submit" class="btn btn-info">Logout</button>');
-    $jqueryMap.$logout_button = $('#log_out');
-    console.log($jqueryMap.$logout_button);
+    jqueryMap.$logout_button = $('#log_out');
+    console.log(jqueryMap.$logout_button);
     $('#log_out').bind('click', LogMeout);
   };
 
