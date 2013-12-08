@@ -138,22 +138,30 @@ me.model = (function(){
 
 		_publish_listchange = function(arg_list){
 			var 
-				is_chatee_present,
+				is_chatee_present = false,
 				_usersList = arg_list[0];
 			stateMap.chatters = arg_list[0];
 			$.gevent.publish('me-listchange', [ arg_list ]);
-			console.log(stateMap.chatee);
-			console.log("Printing the new list");
+			console.log("I was chatting with" + stateMap.chatee.email);
+			console.log("and I got this new list");
 			for(var i=0; i<_usersList.length; i = i+1){
 				console.log(_usersList[i].email);
 			}
+			console.log("***********");
 			//******* if 'chatee' is no longer there 'set_chatee must be called'
 			if(stateMap.chatee){
-				is_chatee_present = _usersList.every(function(obj){
+				/*is_chatee_present = _usersList.every(function(obj){
 					console.log(obj.email);
 					console.log(obj.email === stateMap.chatee.email);
 					return (obj.email === stateMap.chatee.email)
-				});	
+				});	*/
+
+				for(var i=0; i<_usersList.length; i = i+1){
+					console.log(_usersList[i].email);
+					if(_usersList[i].email === stateMap.chatee.email){
+						is_chatee_present = true;
+					}
+				}
 				if(!is_chatee_present) {
 					console.log("I suspect the culprit here!");
 					//console.log('Looks like your chatee is not interested');
