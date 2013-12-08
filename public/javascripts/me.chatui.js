@@ -244,12 +244,14 @@ me.chatui = (function(){
       old_chatee = arg_map.old_chatee;
 
       if(! new_chatee){
-        writeAlert(old_chatee.name + ' left the chat');
-        jqueryMap.$title.text( 'Chat' );
-        jqueryMap.$list_box
-          .find('.me-chat-list-name')
-          .removeClass('me-x-select');
+        if(old_chatee){
+          writeAlert(old_chatee.name + ' left the chat');
+          jqueryMap.$title.text( 'Chat' );
+          jqueryMap.$list_box
+            .find('.me-chat-list-name')
+            .removeClass('me-x-select');
         return false;
+        }
       }
       writeAlert('Chatting with ' + new_chatee.name);
       jqueryMap.$title.text('Chatting with ' + new_chatee.name);

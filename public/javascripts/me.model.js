@@ -149,7 +149,7 @@ me.model = (function(){
 					return (obj.email === stateMap.chatee.email)
 				});	
 				if(!is_chatee_present) {
-					console.log('Looks like your chatee is not interested');
+					//console.log('Looks like your chatee is not interested');
 					//Fuck man.. set_chatee needs email and name! screwed up
 					//Write a bad code and publish the event yourself!
 					$.gevent.publish('me-setchatee', {old_chatee: stateMap.chatee, new_chatee: null});
