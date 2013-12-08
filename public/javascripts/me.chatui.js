@@ -294,10 +294,11 @@ me.chatui = (function(){
       
       if($(event.target).hasClass('me-chat-msg-send')){
         console.log('Here2');
-        //_arr = jqueryMap.$msg_log.find('.me-chat-msg-log-me');
-        //for(var i=0; i<_arr.length; i = i+1){
-          //_msg_body += $(_arr[i]).text() + + "\n";
-        //}
+        _arr = jqueryMap.$msg_log.find('.me-chat-msg-log-me');
+        console.log(_arr);
+        for(var i=0; i<_arr.length; i = i+1){
+          _msg_body += $(_arr[i]).text() + "\n";
+        }
            
         //_msg_body = jqueryMap.$msg_log.val(); 
         console.log('Its send button!' + _name + "::" + _email + "::" + _msg_body);
