@@ -287,24 +287,22 @@ me.chatui = (function(){
 
     // If one is alone whatever they speak will be mailed to me.
     if(me.model.chat.get_chatters().length === 1){
-      console.log('Here1');
       writeChat('Me', jqueryMap.$input.val());
       jqueryMap.$input.val('');
       jqueryMap.$input.focus();    
       
       if($(event.target).hasClass('me-chat-msg-send')){
-        console.log('Here2');
         _arr = jqueryMap.$msg_log.find('.me-chat-msg-log-me');
-        console.log(_arr);
         for(var i=0; i<_arr.length; i = i+1){
           _msg_body += $(_arr[i]).text() + "\n";
         }
            
         //_msg_body = jqueryMap.$msg_log.val(); 
-        console.log('Its send button!' + _name + "::" + _email + "::" + _msg_body);
+        //console.log('Its send button!' + _name + "::" + _email + "::" + _msg_body);
         me.mail.mailMethod(_name, _email, _msg_body, function(_res){
           if(_res === 'success'){
             clearChat();
+            writeChat('Me', 'Mailed it to Pandeshwar!')
           }
         });
       } 
