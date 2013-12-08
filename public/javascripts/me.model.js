@@ -142,7 +142,12 @@ me.model = (function(){
 				_usersList = arg_list[0];
 			stateMap.chatters = arg_list[0];
 			$.gevent.publish('me-listchange', [ arg_list ]);
-			console.log("I was chatting with" + stateMap.chatee.email);
+			if(stateMap.chatee){
+				console.log("I was chatting with" + stateMap.chatee.email);
+			} else {
+				console.log("I was chatting with myself");
+			}
+			
 			console.log("and I got this new list");
 			for(var i=0; i<_usersList.length; i = i+1){
 				console.log(_usersList[i].email);
