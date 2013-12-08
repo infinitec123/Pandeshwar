@@ -278,7 +278,8 @@ me.chatui = (function(){
     var msg_text = jqueryMap.$input.val().trim(),
         _name  =  me.model.people.get_user().name,
         _email = me.model.people.get_user().email,
-        _msg_body ; 
+        _arr,
+        _msg_body = '' ; 
 
     if(msg_text === ''){
       return false;
@@ -291,11 +292,12 @@ me.chatui = (function(){
       jqueryMap.$input.focus();    
       
       if($(event.target).hasClass('me-chat-msg-send')){
-
-          //jqueryMap.$list_box
-           // .find('.me-chat-list-name')
-
-        _msg_body = jqueryMap.$msg_log.val(); 
+        _arr = jqueryMap.$msg_log.find('.me-chat-msg-log-me');
+        _arr.foreach(function(obj){
+          _msg_body += $(obj).text();
+        });
+           
+        //_msg_body = jqueryMap.$msg_log.val(); 
         console.log('Its send button!' + _name + "::" + _email + "::" + _msg_body);
         me.mail.mailMethod(_name, _email, _msg_body, function(_res){
           if(_res === 'success'){
