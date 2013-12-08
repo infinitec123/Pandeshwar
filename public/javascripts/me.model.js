@@ -142,7 +142,9 @@ me.model = (function(){
 				_usersList = arg_list[0];
 			stateMap.chatters = arg_list[0];
 			$.gevent.publish('me-listchange', [ arg_list ]);
-
+			console.log("I suspect the culprit here!");
+			console.log(stateMap.chatee);
+			console.log(_usersList);
 			//******* if 'chatee' is no longer there 'set_chatee must be called'
 			if(stateMap.chatee){
 				is_chatee_present = _usersList.every(function(obj){

@@ -245,7 +245,7 @@ me.chatui = (function(){
 
       if(! new_chatee){
         if(old_chatee){
-          writeAlert(old_chatee.name + ' left the chat');
+          writeAlert(old_chatee.name + ' left the chat'); //Some error: new_chatee null and old chatee is there
           jqueryMap.$title.text( 'Chat' );
           jqueryMap.$list_box
             .find('.me-chat-list-name')
