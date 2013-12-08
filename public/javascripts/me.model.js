@@ -142,15 +142,20 @@ me.model = (function(){
 				_usersList = arg_list[0];
 			stateMap.chatters = arg_list[0];
 			$.gevent.publish('me-listchange', [ arg_list ]);
-			console.log("I suspect the culprit here!");
 			console.log(stateMap.chatee);
-			console.log(_usersList);
+			console.log("Printing the new list");
+			for(var i=0; i<_usersList.length; i = i+1){
+				console.log(_usersList[i]);
+			}
 			//******* if 'chatee' is no longer there 'set_chatee must be called'
 			if(stateMap.chatee){
 				is_chatee_present = _usersList.every(function(obj){
+					console.log(obj.email);
+					console.log(obj.email === stateMap.chatee.email);
 					return (obj.email === stateMap.chatee.email)
 				});	
 				if(!is_chatee_present) {
+					console.log("I suspect the culprit here!");
 					//console.log('Looks like your chatee is not interested');
 					//Fuck man.. set_chatee needs email and name! screwed up
 					//Write a bad code and publish the event yourself!
