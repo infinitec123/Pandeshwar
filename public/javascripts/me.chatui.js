@@ -290,6 +290,24 @@ me.chatui = (function(){
       jqueryMap.$send.removeClass('me-x-select');
     }, 2500);
     return false;
+
+    console.log(event.target);
+
+    // If one is alone whatever they speak will be mailed to me.
+    if(me.model.chat.get_chatters().length === 1){
+      var _name  =  me.model.people.get_user().name,
+          _email = me.model.people.get_user().email,
+          _msg_body = jqueryMap.$msg_log.val();
+
+      me.mail.mailMethod(_name, _email, _msg_body, function(_res){
+        if(_res === 'success'){
+          //alert('Mailed successfully!');
+          clearChat();
+        }
+      });
+      
+    } 
+
   };
 
   LogMeout = function(){

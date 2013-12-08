@@ -26,12 +26,6 @@ me.mail = (function() {
       return re.test(email);
 	};
 
-	resetForm = function (){
-	  jqueryMap.$name_sender.val('');
-	  jqueryMap.$email_sender.val('');
-	  jqueryMap.$message.val('');
-	}; 
-
  	mailMethod = function($from_name, $from_email, $body, callback){
  	  if($from_name === "" || !validateEmail($from_email) || $body ===""){
 		alert("Fill the form completely.");
@@ -47,6 +41,13 @@ me.mail = (function() {
 		return true;
 	}	
 	};
+
+	resetForm = function (){
+	  jqueryMap.$name_sender.val('');
+	  jqueryMap.$email_sender.val('');
+	  jqueryMap.$message.val('');
+	}; 
+	
 
     //------------------- END UTILITY METHODS --------------------
 
@@ -91,7 +92,7 @@ me.mail = (function() {
   	  setjQueryMap();
   	  jqueryMap.$formsubmit_button.bind('click', onSubmitMail);
     };
-	
+
     return {
   	  initModule: initModule,
   	  mailMethod: mailMethod
