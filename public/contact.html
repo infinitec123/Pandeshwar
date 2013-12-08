@@ -14,47 +14,17 @@
         padding-bottom: 40px;
       }
 
-      .container-narrow {
-        margin: 0 auto;
-        max-width: 700px;
-      }
-      .container-narrow > hr {
-        margin: 30px 0;
-      }
-
       .mailreply {
         display: none;
       }
 
-      #chat{
-      height:500px;
-      overflow: auto;
-    }
-    #contentWrap{
-      display: none;
-    }
-    #chatWrap{
-      float: left;
-      border: 1px #cbcbcb dotted;
-    }
-    .error{
-      color: red;
-    }
-    .whisper{
-      color: gray;
-      font-style: italic;
-    }
 
-    #nickError{
-      color: red;
-    }
-
-    #users{
-      color: #0cf438;
-    }
 
     </style>
-    <link href="stylesheets/bootstrap-responsive.css" rel="stylesheet">
+      <!-- our stylesheets -->
+    <link rel="stylesheet" href="stylesheets/me.css"       type="text/css"/>
+    <link rel="stylesheet" href="stylesheets/me.shell.css" type="text/css"/>
+    <link rel="stylesheet" href="stylesheets/me.chat.css"  type="text/css"/>
 
   </head>
 
@@ -79,14 +49,16 @@
       <div class="hero-unit" style="background-color:#00c4d6; color: #FFFFFF; height: 150px; text-align: center; ">
         <h1 style="text-align:center">Together Can We?</h1>
       </div>
+    </div> 
 
-      <div class="row">
+    <div class="row"> 
         <div class="span8">
           <h3>Contact</h3>
           <p><b>Address: </b><br/>#474, 5th Cross, 6th Main<br/>MSR Nagar<br/>Bangalore-560054<br/><br/><b>Mail: </b></p>
-
-
-      <div class="span6">
+        </div>
+    
+    
+    <div class="span6">
       <form>
           <div class="controls controls-row">
               <input id="name" name="name" type="text" class="span3" placeholder="Name"> 
@@ -99,53 +71,29 @@
           <div class="controls">
              <button id="contact-submit" type="submit" class="btn btn-primary input-medium pull-right">Send</button>
           </div>
-      </div>
-        </div>
+    </div>
 
+    <div id="chatInvite">
+      <a href='/auth/facebook' class="btn btn-primary">Login through FaceBook to Chat</a>
+    </div>
 
-
-        <div class="span4">
-          <h3>Chat Live</h3>
-          <p>Pandeshwar is online</p>
-          <br/>
-
-          <div id="nickWrap">
-          <p>Enter your Name:</p>
-          <p id="nickError"></p>
-          <form id="setNick">
-              <input size="30" id="nickname"></input>
-              <button class="btn btn-primary btn-small" id="startchat" type="button">Join the Chat</button>
-           </form>
-          </div>
-
-            <div id="contentWrap">
-             <div id="chatWrap">
-              <div id="chat"></div>
-              
-            <form id="send-message">
-            <input size="35" id="messageip" input="text"></input>
-            <input type="submit" class="btn"></input>
-           </form>
-           </div>
-           <div id="users"></div>
-            </div>
-
-
-
-        </div>
-      </div>
-      <hr>
-      <footer>
-        <p>&copy; Sharath Pandeshwar 2013</p>
-      </footer>
-    </div> 
+    <div class="span4" id="chatDiv"></div>
+    </div>
     </div> 
 
-    <script src="javascripts/jquery-1.7.2.min.js"></script>
-    <script src="javascripts/bootstrap.min.js"></script>
-    <script src="javascripts/main.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
-
+    <script src="socket.io/socket.io.js" ></script>
+    <script src="javascripts/lib/jquery-1.7.2.min.js"></script>
+    <script src="javascripts/lib/bootstrap.min.js"></script>
+    <script src="javascripts/lib/jquery.event.gevent-0.1.9.js"></script>
+    <script src="javascripts/lib/jquery.event.ue-0.3.2.js"    ></script>
+    <script src="javascripts/me.js"></script>
+    <script src="javascripts/me.shell.js"></script>
+    <script src="javascripts/me.chatui.js"></script>
+    <script src="javascripts/me.data.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        me.initModule($('#chatDiv'));
+      });
+    </script>
   </body>
-  <embed src='Male_Nintu.mp3' hidden='true' autostart='true' loop='false' class='playSound'>
 </html>

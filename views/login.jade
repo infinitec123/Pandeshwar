@@ -1,17 +1,1 @@
-h1 Login
-  form(action='/login', method='post')
-      fieldset
-        legend Credentials
-        p#error.error
-        label
-          | Email:
-          input(type='text', name='email')
-        br
-        label
-          | Password:
-          input(type='password', name='password')
-        br
-        input(type='submit', value='Login Now')
-    ul
-      li
-        a(href='/logout') Logout
+a(href="/auth/facebook") Log In With Facebook

@@ -1,0 +1,29 @@
+/*
+ * me.css
+ * Root namespace styles
+*/
+
+
+/** Begin me namespace selectors */
+  #me {
+    position   : absolute;
+    top        : 0;
+    left       : 0;
+    bottom     : 0;
+    right      : 0;
+    background : #fff;
+    min-height : 15em;
+    min-width  : 35em;
+    overflow   : hidden;
+  }
+/** End me namespace selectors */
+
+/** Begin utility selectors */
+  .me-x-select {}
+  .me-x-clearfloat {
+    height     : 0      !important;
+    float      : none   !important;
+    visibility : hidden !important;
+    clear      : both   !important;
+  }
+/** End utility selectors */

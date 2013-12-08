@@ -1,0 +1,91 @@
+/*
+ * me.shell.css
+ * Shell styles
+*/
+
+.me-shell-head, .me-shell-head-logo, .me-shell-head-acct,
+.me-shell-head-search, .me-shell-main, .me-shell-main-nav,
+.me-shell-main-content, .me-shell-foot,
+.me-shell-head-shell-modal {
+  position : absolute;
+}
+.me-shell-head {
+  top    : 0;
+  left   : 0;
+  right  : 0;
+  height : 40px;
+}
+.me-shell-head-logo {
+  top    : 4px;
+  left   : 8px;
+  height : 32px;
+  width  : 128px;
+}
+  .me-shell-head-logo h1 {
+    font   : 800 22px/22px Arial, Helvetica, sans-serif;
+    margin : 0;
+  }
+  .me-shell-head-logo p {
+    font   : 800 10px/10px Arial, Helvetica, sans-serif;
+    margin : 0;
+  }
+
+.me-shell-head-acct {
+  top           : 4px;
+  right         : 0;
+  width         : 210px;
+  height        : 32px;
+  line-height   : 32px;
+  background    : #888;
+  color         : #fff;
+  text-align    : center;
+  cursor        : pointer;
+  overflow      : hidden;
+  text-overflow : ellipsis;
+}
+.me-shell-main {
+  top    : 40px;
+  left   : 0;
+  bottom : 40px;
+  right  : 0;
+}
+.me-shell-main-content,
+.me-shell-main-nav {
+  top    : 0;
+  bottom : 0;
+}
+.me-shell-main-nav {
+  width      : 400px;
+  background : #eee;
+  z-index    : 1;
+}
+  .me-x-closed .me-shell-main-nav {
+    width  : 0;
+  }
+
+.me-shell-main-content {
+  left  : 400px;
+  right : 0;
+  background : #ddd;
+}
+  .me-x-closed .me-shell-main-content {
+    left : 0;
+  }
+.me-shell-foot {
+  bottom : 0;
+  left   : 0;
+  right  : 0;
+  height : 40px;
+}
+.me-shell-modal {
+  margin-top    : -200px;
+  margin-left   : -200px;
+  top           : 50%;
+  left          : 50%;
+  width         : 400px;
+  height        : 400px;
+  background    : #fff;
+  border-radius : 3px;
+  z-index       : 2;
+  display       : none;
+}

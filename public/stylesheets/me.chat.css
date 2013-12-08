@@ -1,0 +1,193 @@
+/*
+ * me.chat.css
+ * Chat feature styles
+*/
+
+.me-chat {
+  position      : fixed;
+  bottom        : 0;
+  right         : 60px;
+  width         : 35em;
+  height        : 2em;
+  background    : #fff;
+  border-radius : 0 0 0 0;
+  border-style  : solid;
+  border-width  : thin 0 0 thin;
+  border-color  : #888;
+  box-shadow    : 0 0 0.75em 0 #888;
+}
+
+.me-chat-head, .me-chat-closer {
+  position      : absolute;
+  top           : 0;
+  height        : 2em;
+  line-height   : 1.8em;
+  border-bottom : thin solid #888;
+  cursor        : pointer;
+  background    : #888;
+  color         : white;
+  font-family   : arial, helvetica, sans-serif;
+  font-weight   : 800;
+  text-align    : center;
+}
+
+.me-chat-head {
+  left          : 0;
+  right         : 0em;
+  border-radius : 0 0 0 0;
+}
+
+.me-chat-closer {
+  right : 0;
+  width : 2em;
+}
+  .me-chat-closer:hover {
+    background : #800;
+  }
+
+.me-chat-head-toggle {
+  position      : absolute;
+  top           : 0;
+  left          : 0;
+  width         : 2em;
+  bottom        : 0;
+  border-radius : 0.3em 0 0 0;
+}
+
+.me-chat-head-title {
+  position    : absolute;
+  left        : 50%;
+  width       : 16em;
+  margin-left : -8em;
+}
+
+.me-chat-sizer {
+  position : absolute;
+  top      : 2em;
+  left     : 0;
+  right    : 0;
+}
+
+.me-chat-list {
+  position : absolute;
+  top      : 0;
+  left     : 0;
+  bottom   : 0;
+  width    : 10em;
+}
+
+.me-chat-msg {
+  position : absolute;
+  top      : 0;
+  left     : 10em;
+  bottom   : 0;
+  right    : 0;
+}
+
+.me-chat-msg-log,
+.me-chat-list-box {
+  position   : absolute;
+  top        : 1em;
+  overflow-x : hidden;
+}
+
+.me-chat-msg-log {
+  left       : 0em;
+  right      : 1em;
+  bottom     : 4em;
+  padding    : 0.5em;
+  border     : thin solid #888;
+  overflow-y : scroll;
+}
+
+.me-chat-msg-log-msg {
+  background-color : #eee;
+}
+
+.me-chat-msg-log-me {
+  font-weight : 800;
+  color       : #484;
+}
+
+.me-chat-msg-log-alert {
+  font-style  : italic;
+  background  : #a88;
+  color       : #fff;
+}
+
+.me-chat-list-box {
+  left             : 1em;
+  right            : 1em;
+  bottom           : 1em;
+  overflow-y       : auto;
+  border-width     : thin 0 thin thin;
+  border-style     : solid;
+  border-color     : #888;
+  background-color : #888;
+  color            : #ddd;
+  border-radius    : 0 0 0 0;
+}
+
+.me-chat-list-name, .me-chat-list-note {
+  width   : 100%;
+  padding : 0.1em 0.5em;
+}
+
+.me-chat-list-name {
+  cursor : pointer;
+}
+  .me-chat-list-name:hover {
+    background-color : #aaa;
+    color            : #888;
+  }
+  .me-chat-list-name.me-x-select {
+    background-color : #fff;
+    color            : #444;
+  }
+
+.me-chat-msg-in {
+  position   : absolute;
+  height     : 2em;
+  left       : 0em;
+  right      : 1em;
+  bottom     : 1em;
+  border     : thin solid #888;
+  background : #888;
+}
+
+.me-chat-msg-in input[type=text] {
+  position    : absolute;
+  width       : 73%;
+  height      : 100%;
+  line-height : 100%;
+  padding     : 0 0.5em;
+  border      : 0;
+  background  : #ddd;
+  color       : #666;
+}
+  .me-chat-msg-in input[type=text]:focus {
+    background : #ff8;
+    color      : #222;
+  }
+
+.me-chat-msg-send {
+  position    : absolute;
+  top         : 0;
+  right       : 0;
+  width       : 25%;
+  height      : 100%;
+  line-height : 1.9em;
+  text-align  : center;
+  color       : #fff;
+  font-weight : 800;
+  cursor      : pointer;
+}
+  .me-chat-msg-send:hover,
+  .me-chat-msg-send.me-x-select {
+    background : #444;
+    color      : #ff0;
+  }
+
+.me-chat-head:hover .me-chat-head-toggle {
+  background : #aaa;
+}
