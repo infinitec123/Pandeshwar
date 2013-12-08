@@ -168,7 +168,7 @@ me.chatui = (function(){
     clearChat();
     setSliderPosition('hidden');
     jqueryMap.$welcome_body.empty();
-    jqueryMap.$welcome_title.html('a.btn.btn-primary(href="/auth/facebook") Login through FaceBook to Chat');
+    jqueryMap.$welcome_title.html('<a href="/auth/facebook" class="btn btn-primary">Login through FaceBook to Chat</a>');
   };
 
   onUpdatechat = function(event, msg_map){
