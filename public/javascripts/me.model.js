@@ -148,18 +148,8 @@ me.model = (function(){
 				console.log("I was chatting with myself");
 			}
 			
-			console.log("and I got this new list");
-			for(var i=0; i<_usersList.length; i = i+1){
-				console.log(_usersList[i].email);
-			}
-			console.log("***********");
 			//******* if 'chatee' is no longer there 'set_chatee must be called'
 			if(stateMap.chatee){
-				/*is_chatee_present = _usersList.every(function(obj){
-					console.log(obj.email);
-					console.log(obj.email === stateMap.chatee.email);
-					return (obj.email === stateMap.chatee.email)
-				});	*/
 
 				for(var i=0; i<_usersList.length; i = i+1){
 					console.log(_usersList[i].email);
@@ -169,7 +159,6 @@ me.model = (function(){
 				}
 				if(!is_chatee_present) {
 					console.log("I suspect the culprit here!");
-					//console.log('Looks like your chatee is not interested');
 					//Fuck man.. set_chatee needs email and name! screwed up
 					//Write a bad code and publish the event yourself!
 					$.gevent.publish('me-setchatee', {old_chatee: stateMap.chatee, new_chatee: null});

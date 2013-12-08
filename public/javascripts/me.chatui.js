@@ -159,7 +159,8 @@ me.chatui = (function(){
   };
 
   onLogout = function(){
-    setSliderPosition('closed');
+    clearChat();
+    setSliderPosition('hidden');
   };
 
   onUpdatechat = function(event, msg_map){
