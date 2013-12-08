@@ -160,7 +160,7 @@ me.chatui = (function(){
   onLogin = function(){
     setSliderPosition('opened');
     jqueryMap.$welcome_body.html('<button id="log_out" type="submit" class="btn btn-info">Logout</button>');
-    //jqueryMap.$logout_button = $('#log_out');
+    jqueryMap.$logout_button = $('#log_out');
     //console.log(jqueryMap.$logout_button);
     //$('#log_out').bind('click', LogMeout);
     jqueryMap.$logout_button.bind('click', LogMeout);
@@ -181,9 +181,6 @@ me.chatui = (function(){
       msg_text  = msg_map.msg_txt,
       _user = me.model.people.get_user();
       
-      //console.log(msg_text + ":::"+ sender_email);
-      //console.log(msg_map);
-
       is_user = sender_email === _user.email;
       if(is_user){
         writeChat('Me', msg_text); 
@@ -211,8 +208,6 @@ me.chatui = (function(){
       if(_chatee && _chatee.email === _chattersList[i].email){
         select_class=' me-x-select';
       }
-
-      //console.log(list_html);
 
       list_html
         += '<div class="me-chat-list-name'
