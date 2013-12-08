@@ -98,6 +98,7 @@ me.chatui = (function(){
       $send     : $slider.find( '.me-chat-msg-send' ),
       $form     : $slider.find( '.me-chat-msg-form' ),
       $welcome_body  : $('#welcomebox_body'),
+      $chatInvite    : $('#chatInvite'),
       $logout_button : $('#log_out'),
       $window   : $(window)
     };
@@ -159,14 +160,17 @@ me.chatui = (function(){
   onLogin = function(){
     setSliderPosition('opened');
     jqueryMap.$welcome_body.html('<button id="log_out" type="submit" class="btn btn-info">Logout</button>');
-    jqueryMap.$logout_button = $('#log_out');
-    console.log(jqueryMap.$logout_button);
-    $('#log_out').bind('click', LogMeout);
+    //jqueryMap.$logout_button = $('#log_out');
+    //console.log(jqueryMap.$logout_button);
+    //$('#log_out').bind('click', LogMeout);
+    jqueryMap.$logout_button.bind('click', LogMeout);
   };
 
   onLogout = function(){
     clearChat();
     setSliderPosition('hidden');
+    jqueryMap.$welcome_body.empty();
+    jqueryMap.$chatInvite.html('a.btn.btn-primary(href="/auth/facebook") Login through FaceBook to Chat');
   };
 
   onUpdatechat = function(event, msg_map){
@@ -297,7 +301,7 @@ me.chatui = (function(){
   };
 
   LogMeout = function(){
-    console.log('Applying to logout!');
+    //console.log('Applying to logout!');
     me.model.people.logout();
   }
 
