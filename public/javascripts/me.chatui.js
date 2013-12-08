@@ -285,18 +285,19 @@ me.chatui = (function(){
 
     // If one is alone whatever they speak will be mailed to me.
     if(me.model.chat.get_chatters().length === 1){
-      writeChat('Me', jqueryMap.$input.val());    
-      _msg_body = jqueryMap.$msg_log.val();
-
+      writeChat('Me', jqueryMap.$input.val());
+      jqueryMap.$input.val('');
+      jqueryMap.$input.focus();    
+      
       if($(event.target).hasClass('me-chat-msg-send')){
+        _msg_body = jqueryMap.$msg_log.val(); 
         console.log('Its send button!' + _name + "::" + _email + "::" + _msg_body);
         me.mail.mailMethod(_name, _email, _msg_body, function(_res){
           if(_res === 'success'){
-            //alert('Mailed successfully!');
             clearChat();
           }
-        }); 
-      }
+        });
+      } 
       return false;
     } 
 
