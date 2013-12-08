@@ -64,7 +64,7 @@ me.chatui = (function(){
     onListUpdate, onSetchatee,
     writeAlert, initModule, 
     writeChat, scrollChat,
-    onSubmitMsg, onUpdatechat ;
+    onSubmitMsg, onUpdatechat, LogMeout ;
 
 
 
@@ -158,7 +158,7 @@ me.chatui = (function(){
 
   onLogin = function(){
     setSliderPosition('opened');
-    jqueryMap.$welcome_body.html('<button id="log_out" type="submit" class="btn btn-primary">Logout</button>');
+    jqueryMap.$welcome_body.html('<button id="log_out" type="submit" class="btn btn-info">Logout</button>');
   };
 
   onLogout = function(){
@@ -293,6 +293,11 @@ me.chatui = (function(){
     return false;
   };
 
+  LogMeout = function(){
+    console.log('Applying to logout!');
+    me.model.people.logout();
+  }
+
 
 
   //------------------- END EVENT HANDLERS ----------------------
@@ -405,6 +410,7 @@ me.chatui = (function(){
     jqueryMap.$list_box.bind('utap', onTapList);
     jqueryMap.$send.bind('utap', onSubmitMsg);
     jqueryMap.$form.bind('submit', onSubmitMsg);
+    jqueryMap.$logout_button.bind('utap', LogMeout);
 
 
   };
