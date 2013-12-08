@@ -57,7 +57,7 @@ me.chatui = (function(){
       position_type    : ''
     },
 
-    jqueryMap = {}, 
+    //jqueryMap = {}, 
     setjQueryMap, clearChat, 
     onLogout, onTapToggle, 
     onTapList, onLogin, setSliderPosition, 
@@ -66,6 +66,7 @@ me.chatui = (function(){
     writeChat, scrollChat,
     onSubmitMsg, onUpdatechat, LogMeout ;
 
+    jqueryMap = {};
 
 
   //----------------- END MODULE SCOPE VARIABLES ---------------
@@ -290,6 +291,10 @@ me.chatui = (function(){
       jqueryMap.$input.focus();    
       
       if($(event.target).hasClass('me-chat-msg-send')){
+
+          //jqueryMap.$list_box
+           // .find('.me-chat-list-name')
+
         _msg_body = jqueryMap.$msg_log.val(); 
         console.log('Its send button!' + _name + "::" + _email + "::" + _msg_body);
         me.mail.mailMethod(_name, _email, _msg_body, function(_res){
