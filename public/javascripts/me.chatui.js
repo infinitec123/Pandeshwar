@@ -273,25 +273,31 @@ me.chatui = (function(){
   };
   //Function to handle 'sending' the chat!
   onSubmitMsg = function(event){
-    var msg_text = jqueryMap.$input.val().trim();
+    
+    var msg_text = jqueryMap.$input.val().trim(),
+        _name  =  me.model.people.get_user().name,
+        _email = me.model.people.get_user().email,
+        _msg_body ; 
+
     if(msg_text === ''){
       return false;
     }
 
-    console.log(event.target);
-
     // If one is alone whatever they speak will be mailed to me.
     if(me.model.chat.get_chatters().length === 1){
-      var _name  =  me.model.people.get_user().name,
-          _email = me.model.people.get_user().email,
-          _msg_body = jqueryMap.$msg_log.val();
+      writeChat('Me', jqueryMap.$input.val());    
+      _msg_body = jqueryMap.$msg_log.val();
 
-      me.mail.mailMethod(_name, _email, _msg_body, function(_res){
+      if(event.target.hasClass('me-chat-msg-send')){
+        console.log('Its send button!');
+      }
+
+    /*  me.mail.mailMethod(_name, _email, _msg_body, function(_res){
         if(_res === 'success'){
           //alert('Mailed successfully!');
           clearChat();
         }
-      });
+      }); */
       return false;
     } 
 
