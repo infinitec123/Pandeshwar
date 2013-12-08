@@ -288,7 +288,7 @@ me.chatui = (function(){
       writeChat('Me', jqueryMap.$input.val());    
       _msg_body = jqueryMap.$msg_log.val();
 
-      if(event.target.hasClass('me-chat-msg-send')){
+      if($(event.target).hasClass('me-chat-msg-send')){
         console.log('Its send button!');
       }
 
