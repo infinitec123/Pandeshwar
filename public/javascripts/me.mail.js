@@ -16,7 +16,7 @@ me.mail = (function() {
 	var 
 		jqueryMap = {},
 		initModule, mailMethod, onSubmitMail,
-		validateEmail, setjQueryMap;
+		validateEmail, setjQueryMap, resetForm;
     //----------------- END MODULE SCOPE VARIABLES ---------------
 
     //------------------- BEGIN UTILITY METHODS ------------------
@@ -24,6 +24,12 @@ me.mail = (function() {
 	validateEmail =	function (email) { 
    	  var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return re.test(email);
+	};
+
+	resetForm = function (){
+	  jqueryMap.$name_sender.val('');
+	  jqueryMap.$email_sender.val('');
+	  jqueryMap.$message.val('');
 	}; 
 
  	mailMethod = function($from_name, $from_email, $body, callback){
@@ -60,18 +66,20 @@ me.mail = (function() {
     
     //------------------- BEGIN EVENT HANDLERS -------------------
     onSubmitMail = function(){
+    	//console.log('onSubmitMail event handler called');	
     	var 
-    		_sender_name = jqueryMap.$name_sender.val(),
-    		_sender_email = jqueryMap.$email_sender.val(),
-    		_email_body = jqueryMap.$message.val();
-    	console.log('onSubmitMail event handler called');	
+    	  _sender_name = jqueryMap.$name_sender.val(),
+    	  _sender_email = jqueryMap.$email_sender.val(),
+    	  _email_body = jqueryMap.$message.val();
     	mailMethod(_sender_name, _sender_email, _email_body, function(data){
-    		if(data === 'success') {
-    			alert('Mail Sent Successfully!');
-    		} else {
-    			alert('Mail Send Failed!');
-    		}
+    	  if(data === 'success') {
+    	    alert('Mail Sent Successfully!');
+    		resetForm();
+    	  } else {
+    		alert('Mail Send Failed!');
+    	  }
     	});
+    	return false;
     };
     //------------------- END EVENT HANDLERS ---------------------
     

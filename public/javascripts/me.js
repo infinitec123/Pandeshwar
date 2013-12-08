@@ -18,6 +18,7 @@ var me = (function(){
     if($name){  
       me.shell.initModule($container, $name, $email);
     } 
+    me.mail.initModule();
   	
   };
   return {initModule: initModule};

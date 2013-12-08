@@ -218,8 +218,8 @@ me.chatui = (function(){
     if ( list_html ==="" ) {
       list_html = String()
         + '<div class="me-chat-list-note">'
-        + 'To talk to oneself is the fate of all great souls...<br><br>'
-        + 'No one is online'
+        + 'Great Souls talk to themselves...<br><br>'
+        + 'No one is Online'
         + '</div>';
       clearChat();
     }
@@ -283,7 +283,6 @@ me.chatui = (function(){
     }
 
     me.model.chat.send_msg( msg_text );
-    //console.log("Yet to send to server" + msg_text);
     jqueryMap.$input.val('');
     jqueryMap.$input.focus();
     jqueryMap.$send.addClass('me-x-select');
