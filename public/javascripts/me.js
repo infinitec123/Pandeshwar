@@ -15,13 +15,9 @@ var me = (function(){
   'use strict';
 
   var initModule = function($container, $name, $email){
-  	//
-    if($name){
-      //console.log("Received " + $name + "::" + $email);
+    if($name){  
       me.shell.initModule($container, $name, $email);
-    } else{
-      //console.log("Chat is not enabled untill you Login");
-    }
+    } 
   	
   };
   return {initModule: initModule};
