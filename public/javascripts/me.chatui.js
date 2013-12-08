@@ -278,7 +278,7 @@ me.chatui = (function(){
     var msg_text = jqueryMap.$input.val().trim(),
         _name  =  me.model.people.get_user().name,
         _email = me.model.people.get_user().email,
-        _arr,
+        //_arr,
         _msg_body = '' ; 
 
     if(msg_text === ''){
@@ -287,15 +287,17 @@ me.chatui = (function(){
 
     // If one is alone whatever they speak will be mailed to me.
     if(me.model.chat.get_chatters().length === 1){
+      console.log('Here1');
       writeChat('Me', jqueryMap.$input.val());
       jqueryMap.$input.val('');
       jqueryMap.$input.focus();    
       
       if($(event.target).hasClass('me-chat-msg-send')){
+        console.log('Here2');
         _arr = jqueryMap.$msg_log.find('.me-chat-msg-log-me');
-        _arr.foreach(function(obj){
-          _msg_body += $(obj).text();
-        });
+        for(var i=0; i<_arr.length; i = i+1){
+          _msg_body += $(_arr[i]).text() + + "\n";
+        }
            
         //_msg_body = jqueryMap.$msg_log.val(); 
         console.log('Its send button!' + _name + "::" + _email + "::" + _msg_body);
