@@ -184,14 +184,15 @@ me.chatui = (function(){
 
   onListUpdate = function(){
     var i, 
-        select_class = '',
+        select_class,
         list_html ="",
         _chattersList = me.model.chat.get_chatters(),
         _chatee = me.model.chat.get_chatee(),
         _user = me.model.people.get_user();
 
     for(i = 0; i < _chattersList.length; i = i + 1){
-
+      select_class = '';
+      
       if(_user.email === _chattersList[i].email){
         continue;
       }
@@ -245,7 +246,7 @@ me.chatui = (function(){
 
       if(! new_chatee){
         if(old_chatee){
-          writeAlert(old_chatee.name + ' left the chat'); //Some error: new_chatee null and old chatee is there
+          writeAlert(old_chatee.name + ' left the chat');
           jqueryMap.$title.text( 'Chat' );
           jqueryMap.$list_box
             .find('.me-chat-list-name')
