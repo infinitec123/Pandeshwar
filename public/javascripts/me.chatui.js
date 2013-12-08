@@ -277,19 +277,6 @@ me.chatui = (function(){
     if(msg_text === ''){
       return false;
     }
-    if(! me.model.chat.get_chatee()){
-      writeAlert('Select whom to');
-      return false;
-    }
-
-    me.model.chat.send_msg( msg_text );
-    jqueryMap.$input.val('');
-    jqueryMap.$input.focus();
-    jqueryMap.$send.addClass('me-x-select');
-    setTimeout(function(){
-      jqueryMap.$send.removeClass('me-x-select');
-    }, 2500);
-    return false;
 
     console.log(event.target);
 
@@ -305,9 +292,22 @@ me.chatui = (function(){
           clearChat();
         }
       });
-      
+      return false;
     } 
 
+    if(! me.model.chat.get_chatee()){
+      writeAlert('Select whom to');
+      return false;
+    }
+
+    me.model.chat.send_msg( msg_text );
+    jqueryMap.$input.val('');
+    jqueryMap.$input.focus();
+    jqueryMap.$send.addClass('me-x-select');
+    setTimeout(function(){
+      jqueryMap.$send.removeClass('me-x-select');
+    }, 2500);
+    return false;
   };
 
   LogMeout = function(){
