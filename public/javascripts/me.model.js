@@ -145,7 +145,7 @@ me.model = (function(){
 			console.log(stateMap.chatee);
 			console.log("Printing the new list");
 			for(var i=0; i<_usersList.length; i = i+1){
-				console.log(_usersList[i]);
+				console.log(_usersList[i].email);
 			}
 			//******* if 'chatee' is no longer there 'set_chatee must be called'
 			if(stateMap.chatee){
