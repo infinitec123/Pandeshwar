@@ -281,10 +281,6 @@ me.chatui = (function(){
         //_arr,
         _msg_body = '' ; 
 
-    if(msg_text === ''){
-      return false;
-    }
-
     // If one is alone whatever they speak will be mailed to me.
     if(me.model.chat.get_chatters().length === 1){
       writeChat('Me', jqueryMap.$input.val());
@@ -308,6 +304,10 @@ me.chatui = (function(){
       } 
       return false;
     } 
+
+    if(msg_text === ''){
+      return false;
+    }
 
     if(! me.model.chat.get_chatee()){
       writeAlert('Select whom to');
