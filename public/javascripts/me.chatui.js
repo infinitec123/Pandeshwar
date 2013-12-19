@@ -287,6 +287,7 @@ me.chatui = (function(){
       jqueryMap.$input.val('');
       jqueryMap.$input.focus();    
       
+      // If the user is talking to himself!
       if($(event.target).hasClass('me-chat-msg-send')){
         _arr = jqueryMap.$msg_log.find('.me-chat-msg-log-me');
         for(var i=0; i<_arr.length; i = i+1){
@@ -298,7 +299,7 @@ me.chatui = (function(){
         me.mail.mailMethod(_name, _email, _msg_body, function(_res){
           if(_res === 'success'){
             clearChat();
-            writeChat('Me', 'Mailed it to Pandeshwar!')
+            writeAlert('Mailed successfully to Pandeshwar!')
           }
         });
       } 
