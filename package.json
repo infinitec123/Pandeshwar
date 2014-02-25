@@ -21,6 +21,7 @@
     "passport-facebook": "*",
     "mongoose": "~3.6.4",
     "connect-flash": "*",
+    "node-gcm": "*",
     "newrelic": "*"
   }
 }
